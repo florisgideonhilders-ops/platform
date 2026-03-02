@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ platform_name }} | Home</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'core/home.css' %}">
+</head>
+<body>
+    <header class="hero">
+        <nav class="nav">
+            <strong>{{ platform_name }}</strong>
+            <a href="#features">Features</a>
+        </nav>
+        <div class="hero-content">
+            <h1>{{ hero_title }}</h1>
+            <p>{{ hero_subtitle }}</p>
+            <a class="cta" href="#features">Bekijk wat je kunt doen</a>
+        </div>
+    </header>
+
+    <main>
+        <section id="features" class="features">
+            {% for feature in features %}
+                <article class="card">
+                    <h2>{{ feature.title }}</h2>
+                    <p>{{ feature.description }}</p>
+                </article>
+            {% endfor %}
+        </section>
+    </main>
+</body>
+</html>
