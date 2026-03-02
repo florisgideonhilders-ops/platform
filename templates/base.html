@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{% block title %}Juridisch Zoekportaal{% endblock %}</title>
+    <style>
+      body { font-family: Arial, sans-serif; max-width: 960px; margin: 0 auto; padding: 1rem; }
+      nav { margin-bottom: 1rem; }
+      nav a { margin-right: 1rem; }
+      .card { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+      input { padding: 0.5rem; margin-right: 0.5rem; }
+      button { padding: 0.5rem 1rem; }
+    </style>
+  </head>
+  <body>
+    <nav>
+      {% if user.is_authenticated %}
+        Ingelogd als <strong>{{ user.username }}</strong> |
+        <a href="{% url 'zoek' %}">Zoeken</a>
+        <a href="{% url 'zoekhistorie' %}">Zoekhistorie</a>
+        <form method="post" action="{% url 'logout' %}" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Uitloggen</button>
+        </form>
+      {% else %}
+        <a href="{% url 'login' %}">Inloggen</a>
+        <a href="{% url 'register' %}">Registreren</a>
+      {% endif %}
+    </nav>
+    {% block content %}{% endblock %}
+  </body>
+</html>

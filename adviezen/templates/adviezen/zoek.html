@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block title %}Zoeken in adviezen{% endblock %}
+{% block content %}
+<h1>Zoeken in adviezen</h1>
+<form method="get">
+  <input name="q" placeholder="Zoek op woorden in advies" value="{{ query }}" />
+  <input name="onderwerp" placeholder="Onderwerp" value="{{ onderwerp }}" />
+  <input name="dictum" placeholder="Dictum" value="{{ dictum }}" />
+  <button type="submit">Zoeken</button>
+</form>
+
+<p>{{ resultaten|length }} resultaat/resultaten gevonden.</p>
+
+{% for zaak in resultaten %}
+  <article class="card">
+    <h3>{{ zaak.octopus_zaaknummer }} - {{ zaak.onderwerp }}</h3>
+    <p><strong>Dictum:</strong> {{ zaak.dictum|default:'-' }}</p>
+    <p>{{ zaak.advies_tekst|truncatewords:60 }}</p>
+  </article>
+{% empty %}
+  <p>Geen resultaten gevonden.</p>
+{% endfor %}
+{% endblock %}
