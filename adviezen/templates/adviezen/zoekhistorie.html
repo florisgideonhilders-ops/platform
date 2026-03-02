@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %}Zoekhistorie{% endblock %}
+{% block content %}
+<h1>Jouw laatste zoekopdrachten</h1>
+<ul>
+  {% for item in historie %}
+    <li>
+      <strong>{{ item.zoekterm }}</strong>
+      {% if item.onderwerp_filter %}(onderwerp: {{ item.onderwerp_filter }}){% endif %}
+      {% if item.dictum_filter %}(dictum: {{ item.dictum_filter }}){% endif %}
+      - {{ item.resultaten_telling }} resultaten op {{ item.aangemaakt_op }}
+    </li>
+  {% empty %}
+    <li>Je hebt nog geen zoekopdrachten uitgevoerd.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
